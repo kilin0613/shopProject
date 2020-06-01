@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MemberDao">
+	
+
+	<insert id="insertMember">
+			INSERT INTO CUSTOMER(CUSTOMER_ID, ID, PASSWORD, NAME, AGE, SEX, ADDRESS, IDENTITY_NUM, EMAIL, PHONE_NUMBER)
+			VALUES((SELECT NVL(MAX(CUSTOMER_ID),0)+1 FROM CUSTOMER), #{id}, #{password}, #{name}, #{age}, #{sex},
+					#{address}, #{identity_number}, #{email}, #{phone_number})
+	</insert>
+	
+	<select id="selectId" resultType="string">
+		SELECT ID FROM CUSTOMER
+		WHERE ID = #{memberId}
+	</select>
+
+	<select id="selectInfo" resultType="VO.MemberVo">
+		SELECT ID, PASSWORD, NAME, AGE, SEX, ADDRESS, IDENTITY_NUM, EMAIL, PHONE_NUMBER FROM CUSTOMER
+		WHERE ID = #{id} AND PASSWORD = #{password}
+	</select>
+</mapper>
