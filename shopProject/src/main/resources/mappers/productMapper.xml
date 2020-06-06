@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="ProductDao">
+
+	<resultMap id="aaa" type="VO.ProductVo">
+    	<result property="p_blob" column="P_BLOB" jdbcType="BLOB" javaType="_byte[]"/>
+	</resultMap>
+
+	<select id="mainProduct" resultType="VO.ProductVo" resultMap="aaa">
+		<![CDATA[SELECT *FROM (SELECT *FROM PRODUCT ORDER BY PRODUCT_ID)
+		WHERE ROWNUM <= 5]]>
+	</select>
+
+</mapper>
