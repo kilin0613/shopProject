@@ -31,15 +31,18 @@ public class MemberService {
 	
 	public MemberVo loginService(MemberVo memberVo) {
 		
-		memberVo =  memberDao.selectMemberInfo(memberVo);
-
+		memberVo = memberDao.selectMemberInfo(memberVo);
 		if(memberVo!=null) {
-			System.out.println("쿼리해서 나온값이 있을때");
 			return memberVo;
 		}
 		
 		return null;
 	}
+	
+	public void updateInfoService(MemberVo memberVo) {
+		memberDao.updateInfo(memberVo);
+	}
+	
 	
 	
 }

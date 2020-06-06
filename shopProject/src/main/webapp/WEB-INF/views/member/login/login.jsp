@@ -6,8 +6,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
 
+<script type="text/javascript">	//히스토리
+	window.history.forward();
+	function noBack() {
+		window.history.forward();
+	}
+</script>
+
+
+
+<style>
 .loginHeaderV3 {
 	padding: 76px 0 60px 0;
 	height: 20px;
@@ -40,7 +49,7 @@
 <meta charset="EUC-KR">
 <title>로그인</title>
 </head>
-<body>
+<body onload="noBack()">
 
 	<div class="loginBoxWrap">
 		<!-- <div class="loginHeaderV3">

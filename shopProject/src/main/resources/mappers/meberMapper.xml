@@ -7,9 +7,9 @@
 	
 
 	<insert id="insertMember">
-			INSERT INTO CUSTOMER(CUSTOMER_ID, ID, PASSWORD, NAME, AGE, SEX, ADDRESS, IDENTITY_NUM, EMAIL, PHONE_NUMBER)
+			INSERT INTO CUSTOMER(CUSTOMER_ID, ID, PASSWORD, NAME, AGE, SEX, ADDRESS, IDENTITY_NUMBER, EMAIL, PHONE_NUMBER,START_DATE,END_DATE)
 			VALUES((SELECT NVL(MAX(CUSTOMER_ID),0)+1 FROM CUSTOMER), #{id}, #{password}, #{name}, #{age}, #{sex},
-					#{address}, #{identity_number}, #{email}, #{phone_number})
+					#{address}, #{identity_number}, #{email}, #{phone_number},SYSDATE,'9999-12-31')
 	</insert>
 	
 	<select id="selectId" resultType="string">
@@ -18,7 +18,19 @@
 	</select>
 
 	<select id="selectInfo" resultType="VO.MemberVo">
-		SELECT ID, PASSWORD, NAME, AGE, SEX, ADDRESS, IDENTITY_NUM, EMAIL, PHONE_NUMBER FROM CUSTOMER
+		SELECT * FROM CUSTOMER
 		WHERE ID = #{id} AND PASSWORD = #{password}
 	</select>
+	
+	<update id="updateInfo" >
+		UPDATE CUSTOMER
+		SET
+			PASSWORD = #{password},
+			AGE = #{age},
+			ADDRESS = #{address},
+			EMAIL = #{email},
+			PHONE_NUMBER = #{phone_number}
+		WHERE
+		CUSTOMER_ID = #{customer_id}
+	</update>
 </mapper>

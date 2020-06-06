@@ -6,20 +6,21 @@
 <title>ShopProject</title>
 
 <style type="text/css">
+
 	
 	div { 
 		box-sizing: border-box;	
 	}
 
 	#top_style{
-		max-width:100%;
+		width:auto;
 		height:20%; 
 		border-bottom:thin solid gray;		
 	}
 	
 	#body_style{
-		padding:100px;
-		width:800px;
+		padding:50px;
+		width:1050px;
 		min-height:800px;
 		height:auto;
 		border-left:thin solid gray;
@@ -36,6 +37,7 @@
 	}
 	
 	#footer_style{
+		width:auto;
 		text-align:center;
 		height:20%; 
 		border-top:thin solid gray;
@@ -49,7 +51,7 @@
 			<jsp:include page="common/top.jsp"/>
 		</div>
 		
-		<div style=" width:1000px; min-height:60%; overflow: auto;">	
+		<div style=" width:1200px; min-height:60%; overflow: auto;">	
 			<div id="side_style">
 				<jsp:include page="common/side.jsp"/>
 			</div>
