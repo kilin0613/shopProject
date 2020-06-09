@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 import service.MainService;
 import service.MemberService;
+import service.ProductService;
 
 @Configuration
 public class ServiceConfig {
@@ -18,6 +19,10 @@ public class ServiceConfig {
 	public MainService mainService() {
 		return new MainService();
 	} 
+	@Bean
+	public ProductService productService() {
+		return new ProductService();
+	}
 	
 	
 }

@@ -16,15 +16,20 @@
 	/* display: inline-block;  */
 	text-align: center;
 }
+#top_style{
+		width:auto;
+		height:150px; 
+		border-bottom:thin solid gray;		
+	}
 </style>
 
 <title>Insert title here</title>
 </head>
 <body>
-
+<div id="top_style">
 	<div style="width: 1200px; height: 100%; display: inline-block;">
 		<div style="width: 100px; height: 100%; display: inline-block;">
-			<img src="resources/image/logo.jpg"
+			<img src="${pageContext.request.contextPath}/image/logo.jpg"
 				style="float: left; width: 100px; height: 100px; display: inline-block;">
 			<div id="div_menu">
 				<form method="post" action="logOut">
@@ -46,6 +51,6 @@
 		</div>
 		
 	</div>
-
+</div>
 </body>
 </html>

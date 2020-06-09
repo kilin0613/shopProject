@@ -13,5 +13,10 @@
 		<![CDATA[SELECT *FROM (SELECT *FROM PRODUCT ORDER BY PRODUCT_ID)
 		WHERE ROWNUM <= 5]]>
 	</select>
+	
+	<select id="selectProductDetail" resultType="VO.ProductVo">
+		SELECT *FROM PRODUCT
+		WHERE PRODUCT_ID = #{productVo.product_id}
+	</select>
 
 </mapper>
