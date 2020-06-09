@@ -12,6 +12,17 @@ ul {
 }
 </style>
 <script type="text/javascript">
+	function checkValue() {
+		var quantity = document.getElementById('quantity').value;
+		var  size_option= document.getElementById('size_option').value;
+		if(quantity<=0||!size_option){
+			alert("수량과 사이즈를 확인해주세요");
+			false;
+		}
+		
+	};
+	
+	
 	
 	function btnPlus() {
 		var count = document.getElementById('quantity').value;
@@ -20,7 +31,8 @@ ul {
 		var total = ${productVo.price} * count;
 		total = total.toLocaleString();
 		document.getElementById('total_price').value = total;
-	}
+		
+	};
 	function btnMinus() {
 		var count = document.getElementById('quantity').value;
 		if(count>0){
@@ -29,8 +41,9 @@ ul {
 			var total = ${productVo.price} * count;
 			total = total.toLocaleString();
 			document.getElementById('total_price').value = total;
+		
 		}
-	}
+	};
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -50,8 +63,9 @@ ul {
 
 			</div>
 			<div
-				style="display: inline-block; width: 350px; height: 600px; border: thin solid #000000;">
+				style="display: inline-block; width: 450px; height: 600px; border: thin solid #000000;">
 				<h4 style="font-size: 18pt;">&nbsp;Product_Info(상품정보)</h4>
+				<form method="post">
 				<ul>
 					<li><p>상품명 | ${productVo.name}</p></li>
 					<li><p>
@@ -61,34 +75,35 @@ ul {
 							\
 						</p></li>
 					<li><p>
-							S&nbsp;I&nbsp;Z&nbsp;E | <select>
+							S&nbsp;I&nbsp;Z&nbsp;E | <select id="size_option">
 								<option value="">선택</option>
-								<option value="">M</option>
-								<option value="">S</option>
-								<option value="">L</option>
-								<option value="">XL</option>
+								<option value="M">M</option>
+								<option value="S">S</option>
+								<option value="L">L</option>
+								<option value="XL">XL</option>
 							</select>
 						</p></li>
 					<li><p>
 							수&nbsp;&nbsp;&nbsp;량 |
-							<button id="btnMinus" onclick="btnMinus()">-</button>
+							<button type="button" onclick="btnMinus();">-</button>
 							&nbsp; <input type="text" readonly="readonly" value="0"
 								id="quantity" style="width: 20px;" />&nbsp;
-							<button id="btnPlus" onclick="btnPlus()">+</button>
+							<button type="button" onclick="btnPlus();">+</button>
 						</p></li>
 				</ul>
 				<ul>
 					<li><p>
 							합계금액 | <input type="text" id="total_price" readonly="readonly"
-								size="5">
-
+								size="5" value="0" style="border: none; font-size: 12pt;">\
 						</p></li>
 					<li><p>
-							<button>장바구니</button>
-							<button>찜하기</button>
-							<button>바로구매</button>
+							<input type="submit" formaction="basket" value="장바구니">
+							<input type="submit" formaction="favorites" value="즐겨찾기">
+							<input type="submit" formaction="basket" value="바로구매">
 						</p></li>
 				</ul>
+				<button type="button" onclick="checkValue()">테스트</button>
+				</form>
 			</div>
 		</div>
 

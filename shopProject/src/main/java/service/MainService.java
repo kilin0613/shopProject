@@ -1,11 +1,9 @@
 package service;
 
-import java.sql.Blob;
 import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.Base64Utils;
 
 import DAO.ProductDao;
 import VO.ProductVo;

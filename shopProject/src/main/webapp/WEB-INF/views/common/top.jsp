@@ -29,13 +29,13 @@
 <div id="top_style">
 	<div style="width: 1200px; height: 100%; display: inline-block;">
 		<div style="width: 100px; height: 100%; display: inline-block;">
-			<img src="${pageContext.request.contextPath}/image/logo.jpg"
+			<img src="${pageContext.request.contextPath}/resources/image/logo.jpg"
 				style="float: left; width: 100px; height: 100px; display: inline-block;">
 			<div id="div_menu">
 				<form method="post" action="logOut">
-					<br> | 회원탈퇴 | 후기게시판 | <a href="infoModify">개인정보수정</a> |  <a href="favorites">즐겨찾기 </a> | 배송조회 | 장바구니 | 비밀번호 찾기 |
+					<br> | 회원탈퇴 | 후기게시판 | <a href="${pageContext.request.contextPath}/infoModify">개인정보수정</a> |  <a href="${pageContext.request.contextPath}/favorites">즐겨찾기 </a> | 배송조회 | 장바구니 | 비밀번호 찾기 |
 					<c:if test="${loginMember == null}">
-						<a href="signUp"> 회원가입 </a>|<a href="login"> logIn </a>  |
+						<a href="${pageContext.request.contextPath}/signUp"> 회원가입 </a>|<a href="${pageContext.request.contextPath}/login"> logIn </a>  |
 						</c:if>
 					<c:if test="${loginMember != null}">
 							 ${loginMember.name} 님 환영합니다!
