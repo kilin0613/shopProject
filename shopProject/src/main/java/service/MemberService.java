@@ -1,5 +1,7 @@
 package service;
 
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,6 +45,23 @@ public class MemberService {
 		memberDao.updateInfo(memberVo);
 	}
 	
+	public void updateMemberWithdrawal(MemberVo memberVo) {
+		memberDao.updateMemberWithdrawal(memberVo);
+	}
 	
-	
+	public MemberVo changedMemberPassword(MemberVo memberVo) {
+		memberVo = memberDao.selectCheckIdEmail(memberVo);
+		if(memberVo != null) { // 정상처리
+			Random random = new Random(System.currentTimeMillis());
+			String newPassword="";
+			
+			for(int i=0;i<6;i++) {
+				newPassword += Integer.toString(random.nextInt(6));
+			}
+			memberVo.setPassword(newPassword);
+			memberDao.updateInfo(memberVo);
+		}
+		
+		return memberVo;	
+	}
 }

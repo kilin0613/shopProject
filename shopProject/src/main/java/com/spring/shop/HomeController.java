@@ -34,7 +34,6 @@ public class HomeController {
 		
 		List<ProductVo> productVo = service.selectMainProduct();
 		model.addAttribute("productVo", productVo);
-		
 		return "home";
 	}
 	

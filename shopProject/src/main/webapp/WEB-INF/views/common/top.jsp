@@ -11,42 +11,50 @@
 <style>
 #div_menu {
 	width: 1200px;
-	
 	/* max-height: 300px; */
 	/* display: inline-block;  */
 	text-align: center;
 }
-#top_style{
-		width:auto;
-		height:150px; 
-		border-bottom:thin solid gray;		
-	}
+
+#top_style {
+	width: auto;
+	height: 150px;
+	border-bottom: thin solid gray;
+}
 </style>
 
 <title>Insert title here</title>
 </head>
 <body>
-<div id="top_style">
-	<div style="width: 1200px; height: 100%; display: inline-block;">
-		<div style="width: 100px; height: 100%; display: inline-block;">
-			<img src="${pageContext.request.contextPath}/resources/image/logo.jpg"
-				style="float: left; width: 100px; height: 100px; display: inline-block;">
-			<div id="div_menu">
-				<form method="post" action="logOut">
-					<br> | 회원탈퇴 | 후기게시판 | <a href="${pageContext.request.contextPath}/infoModify">개인정보수정</a> |  <a href="${pageContext.request.contextPath}/favorites">즐겨찾기 </a> | 배송조회 | 장바구니 | 비밀번호 찾기 |
+	<div id="top_style">
+		<div style="width: 1200px; height: 100%; display: inline-block;">
+			<div style="width: 100px; height: 100%; display: inline-block;">
+				<img
+					src="${pageContext.request.contextPath}/resources/image/logo.jpg"
+					style="float: left; width: 100px; height: 100px; display: inline-block;"/>
+					
+				<div id="div_menu">
+					
+					<form method="post" action="logOut">
+						<br>
+						 후기게시판 | 
+						<a href="${pageContext.request.contextPath}/infoModify">개인정보수정</a> |
+						<a href="${pageContext.request.contextPath}/favorites">즐겨찾기 </a> |
+						<a href="${pageContext.request.contextPath}/delivery"> 배송조회 </a> |
+						<a href="${pageContext.request.contextPath}/basket"> 장바구니</a> |
 					<c:if test="${loginMember == null}">
-						<a href="${pageContext.request.contextPath}/signUp"> 회원가입 </a>|<a href="${pageContext.request.contextPath}/login"> logIn </a>  |
+						<a href="${pageContext.request.contextPath}/findPassword"> 비밀번호 찾기</a> |
+						<a href="${pageContext.request.contextPath}/signUp"> 회원가입 </a>|
+						<a href="${pageContext.request.contextPath}/login"> logIn </a>  |
 						</c:if>
-					<c:if test="${loginMember != null}">
-							 ${loginMember.name} 님 환영합니다!
-								<input type="submit" value="logOut"/>
+					<c:if test="${loginMember != null}"> ${loginMember.name} 님 환영합니다!
+							 <input type="submit" value="logOut"/>
 					</c:if>
 				</form>
-				<form>
-					<p>
-						<input type="text" /> <input type="submit" value="검색" />
-					<p>
-				</form>
+					<form action="search" method="post">
+							<input type="text" name = "keyword"/> 
+							<input type="submit" value="검색" />
+					</form>
 			</div>
 		</div>
 		

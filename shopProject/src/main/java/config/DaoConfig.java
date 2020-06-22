@@ -3,7 +3,10 @@ package config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import DAO.BasketDao;
+import DAO.FavoriteDao;
 import DAO.MemberDao;
+import DAO.OrderDao;
 import DAO.ProductDao;
 
 
@@ -18,5 +21,16 @@ public class DaoConfig {
 	public ProductDao productDao() {
 		return new ProductDao(); 
 	}
-	
+	@Bean
+	public FavoriteDao favoriteDao() {
+		return new FavoriteDao();
+	}
+	@Bean
+	public OrderDao orderDao() {
+		return new OrderDao();
+	}
+	@Bean
+	public BasketDao basketDao() {
+		return new BasketDao();
+	}
 }

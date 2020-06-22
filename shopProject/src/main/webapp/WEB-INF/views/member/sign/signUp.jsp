@@ -6,15 +6,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
 
-<script src="resources/js/addressAPI.js"></script>
-<script src="resources/js/checkSignUp.js"></script>
-<script	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js?autoload=false"></script>
+	
+	<script src="${pageContext.request.contextPath}/resources/js/checkSignUp.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/addressAPI.js"></script>
+	<script	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js?autoload=false"></script>
 
-<link rel="stylesheet" href="resources/css/signUp.css" type="text/css" />
-
-
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/signUp.css" type="text/css" />
 
 <title>회원가입</title>
 
@@ -23,7 +21,7 @@
 	<div id="top1">
 		<div id="top2">
 			<form:form modelAttribute="memberVo" action="signUp" method="post"
-				onsubmit="return validateSignUp()">
+				onsubmit="return validateSignUp();">
 				<p>
 					<label>아이디</label>
 					<form:input path="id" class="btn_info" id="id" />

@@ -19,10 +19,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body>	
 
 	<div id="body_style">
-		<div style="width: 950px; height: 1000px; margin-left: 15%;">
+		<div style="width: 950px; height: auto; margin-left: 15%;">
 			<c:forEach var="productVo" items="${productVo}">
 				<div
 					style="width: 200px; height: 250px; border: thin solid #000000; margin: 40px; display: inline-block; text-align: center; font-size: 8pt;">

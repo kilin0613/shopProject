@@ -18,5 +18,36 @@
 		SELECT *FROM PRODUCT
 		WHERE PRODUCT_ID = #{productVo.product_id}
 	</select>
+	
+	<select id= "selectFavoritesProduct" resultType="VO.ProductVo">
+		SELECT *FROM PRODUCT
+		WHERE PRODUCT_ID IN (SELECT PRODUCT_ID FROM FAVORITES WHERE CUSTOMER_ID=#{customer_id})
+	</select>
+	
+	<select id="searchKeyword" resultType="VO.ProductVo">
+		SELECT *FROM PRODUCT
+		WHERE NAME LIKE '%'|| #{keyword} ||'%'
+	</select>
+	
+	<select id = "selectPrice" resultType="Integer">
+		SELECT PRICE FROM PRODUCT
+		WHERE  PRODUCT_ID = #{product_id}
+	</select>
+	<select id="selectOuterMan" resultType="VO.ProductVo">
+      SELECT * FROM PRODUCT
+      WHERE PRODUCT_ID LIKE '%2'
+         
+   </select>
+   
+   <select id="selectOuterWoMan" resultType="VO.ProductVo">
+      SELECT * FROM PRODUCT
+      WHERE PRODUCT_ID LIKE '%1'
+   </select>
+   
+   <select id = "selectBlob" resultType="VO.ProductVo" resultMap="aaa">
+   		select p_blob from product
+   		where product_id = #{product_id}
+   </select>
+	
 
 </mapper>

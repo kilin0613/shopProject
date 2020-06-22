@@ -42,7 +42,10 @@ public class LoginController {
 
 	}
 	
-	@PostMapping("/logOut")
+	
+	
+	
+	@PostMapping("**/logOut")
 	public String postLogOut(Model model, HttpServletRequest request) {
 		HttpSession session =  request.getSession();
 		

@@ -12,16 +12,18 @@ ul {
 }
 </style>
 <script type="text/javascript">
+
+
+
 	function checkValue() {
 		var quantity = document.getElementById('quantity').value;
 		var  size_option= document.getElementById('size_option').value;
 		if(quantity<=0||!size_option){
 			alert("수량과 사이즈를 확인해주세요");
-			false;
+			return false;
 		}
 		
 	};
-	
 	
 	
 	function btnPlus() {
@@ -52,7 +54,10 @@ ul {
 
 	<%@include file="../common/top.jsp"%>
 	<%@include file="../common/side.jsp"%>
-
+	
+						
+	
+	
 	<div style="width: 1100px; height: 1000px; margin-left: 15%;">
 		<div style="margin-top: 30px; width: 1150px; height: 600px;">
 			<div
@@ -75,7 +80,7 @@ ul {
 							\
 						</p></li>
 					<li><p>
-							S&nbsp;I&nbsp;Z&nbsp;E | <select id="size_option">
+							S&nbsp;I&nbsp;Z&nbsp;E | <select id =size_option name="size_option">
 								<option value="">선택</option>
 								<option value="M">M</option>
 								<option value="S">S</option>
@@ -87,22 +92,37 @@ ul {
 							수&nbsp;&nbsp;&nbsp;량 |
 							<button type="button" onclick="btnMinus();">-</button>
 							&nbsp; <input type="text" readonly="readonly" value="0"
-								id="quantity" style="width: 20px;" />&nbsp;
+								id="quantity" style="width: 20px;" name = "quantity"/>&nbsp;
 							<button type="button" onclick="btnPlus();">+</button>
 						</p></li>
 				</ul>
 				<ul>
 					<li><p>
-							합계금액 | <input type="text" id="total_price" readonly="readonly"
-								size="5" value="0" style="border: none; font-size: 12pt;">\
+							합계금액 | <input type="text" name="total_price" id="total_price" readonly="readonly"
+								size="5" value="0" style="border: none; font-size: 12pt;"/>\
 						</p></li>
 					<li><p>
-							<input type="submit" formaction="basket" value="장바구니">
-							<input type="submit" formaction="favorites" value="즐겨찾기">
-							<input type="submit" formaction="basket" value="바로구매">
+					<c:if test="${loginMember ne null}">
+							<input type="hidden" name = "p_blob" value="${productVo.blobToBase64}">
+							<input type="hidden" name = "product_name" value="${productVo.name}">
+							<input type="hidden" name = "price" value="${productVo.price}">
+							<input type="hidden" name = "product_id" value="${productVo.product_id}">
+					</c:if>							
+							<input type="submit" formaction="${pageContext.request.contextPath}/basket" value="장바구니" formmethod="post"  onclick="return checkValue()">
+											
+								<c:if test="${loginMember ne null and favoriteVo eq null}"> <!--로그인o 즐찾x  추가(post)-->
+									<input type="submit" formaction="${pageContext.request.contextPath}/detail_favorites" value="즐겨찾기 추가" formmethod="post">	
+								</c:if>
+								<c:if test="${loginMember ne null and favoriteVo ne null}"><!--로그인o 즐찾o  삭제(post)-->
+									<input type="submit" formaction="${pageContext.request.contextPath}/detail_favorites" value="즐겨찾기 삭제" formmethod="post">
+								</c:if>
+								<c:if test="${loginMember eq null}"><!--로그인x(세션해제상태) 추가로 표시(get으로 로그인창)-->
+									<input type="submit" formaction="${pageContext.request.contextPath}/login" value="즐겨찾기 추가" formmethod="get">
+								</c:if>
+								
+							<input type="submit" formaction="${pageContext.request.contextPath}/orderAndPaymentOne" value="바로구매" formmethod="post" onclick="return checkValue()">
 						</p></li>
 				</ul>
-				<button type="button" onclick="checkValue()">테스트</button>
 				</form>
 			</div>
 		</div>
