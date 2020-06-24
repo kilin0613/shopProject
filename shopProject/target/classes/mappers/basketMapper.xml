@@ -12,9 +12,10 @@
          VALUES(#{customer_id}, #{product_id}, #{color_id}, #{size_type}, #{name}, #{quantity})
    </insert>
    
+   
    <select id="selectBasket" resultType="VO.BasketVo">
-      SELECT * FROM BASKET
-      WHERE CUSTOMER_ID =#{customer_id}
+      SELECT * FROM BASKET,COLOR
+      WHERE CUSTOMER_ID =#{customer_id} AND BASKET.COLOR_ID = COLOR.COLOR_ID  
    </select>
    
    <delete id="deleteBasket">

@@ -50,7 +50,7 @@
 							<table style= "height:240px;"></table>
 						</td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<td>
 							<table style="margin-left: auto; margin-right: auto; width :600px;" border="1">
 								<tr>
@@ -65,7 +65,7 @@
 
 							</table>
 						</td>
-					</tr>
+					</tr> -->
 					<tr>
 						<td>
 							<table id="my_table">

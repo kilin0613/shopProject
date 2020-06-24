@@ -16,7 +16,7 @@
       /* background-color:rgba(220, 220, 220 ,0.5); */
       padding-left:3%;   
       width:150px;
-      min-height:800px;
+      min-height:100%;
       border-right:thin solid gray;
       height:auto; 
       float:left;
@@ -47,22 +47,22 @@ li > ul.low li { width:180px; }
          <li><a>outer</a>
          
             <ul class="low">
-               <li><a href="${pageContext.request.contextPath}/category?name=outer_man">man</a></li>
+               <li><a href="${pageContext.request.contextPath}/category&name=outer_man">man</a></li>
                <li><a href="${pageContext.request.contextPath}/category?name=outer_woman">woman</a></li>
             </ul>
             </li>
          <li><a>tee</a>
          
             <ul class="low">
-               <li><a href="${pageContext.request.contextPath}/category?name=tee_man">man</a></li>
-               <li><a href="${pageContext.request.contextPath}/category?name=tee_woman">woman</a></li>
+               <li><a href="${pageContext.request.contextPath}/category?category1=man&category2=shirt">man</a></li>
+               <li><a href="${pageContext.request.contextPath}/category?category1=woman&category2=shirt">woman</a></li>
             </ul>
          </li>
          <li><a>pants</a>
          
             <ul class="low">
-               <li><a href="${pageContext.request.contextPath}/category?name=pants_man">man</a></li>
-               <li><a href="category?name=pants_woman">woman</a></li>
+               <li><a href="${pageContext.request.contextPath}/category?category1=man&category2=short">man</a></li>
+               <li><a href="${pageContext.request.contextPath}/category?category1=woman&category2=short">woman</a></li>
             </ul>
          </li>
       </ul>

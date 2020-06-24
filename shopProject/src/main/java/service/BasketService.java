@@ -1,5 +1,6 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
@@ -13,18 +14,19 @@ import VO.ProductVo;
 public class BasketService {
 
    @Autowired
-   BasketDao BasketDao;
+   BasketDao basketDao;
    @Autowired
    ProductDao productDao;
    
-   public void insertBasket(BasketVo BasketVo) {
-      BasketDao.insertBasket(BasketVo);
+   
+   public void insertBasket(BasketVo basketVo) {
+      basketDao.insertBasket(basketVo);
       
    }
    
    public List<BasketVo> selectBasket(String customer_id) {
       
-      List<BasketVo> basketVo = BasketDao.selectBasket(customer_id);
+      List<BasketVo> basketVo = basketDao.selectBasket(customer_id);
       
 	      for(int i=0;i<basketVo.size();i++) {
 	      String product_id = basketVo.get(i).getProduct_id();
@@ -43,7 +45,7 @@ public class BasketService {
    }
    
    
-   public void deleteBasket(BasketVo BasketVo) {
-      BasketDao.deleteBasket(BasketVo);
+   public void deleteBasket(BasketVo basketVo) {
+      basketDao.deleteBasket(basketVo);
    }
 }

@@ -1,23 +1,31 @@
 package VO;
 
 public class ColorVo {
-	private int colorId;
-	private String colorName;
+	private int color_id;
+	private String color;
 
-	public int getColorId() {
-		return colorId;
+	
+	@Override
+	public String toString() {
+		return "ColorVo [color_id=" + color_id + ", color=" + color + "]";
 	}
 
-	public void setColorId(int colorId) {
-		this.colorId = colorId;
+	public int getColor_id() {
+		return color_id;
 	}
 
-	public String getColorName() {
-		return colorName;
+	public void setColor_id(int color_id) {
+		this.color_id = color_id;
 	}
 
-	public void setColorName(String colorName) {
-		this.colorName = colorName;
+	public String getColor() {
+		return color;
 	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+
 
 }

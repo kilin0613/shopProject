@@ -33,11 +33,11 @@ public class BasketController {
 		String customer_id = memberVo.getId();
 		
 		String product_id = req.getParameter("product_id");
-		String color_id = "1";
+		String color_id = req.getParameter("color_id");
 		String size_type = req.getParameter("size_option");
 		String name = req.getParameter("product_name");
 		int quantity = Integer.parseInt(req.getParameter("quantity"));
-	
+		
 		basketVo.setCustomer_id(customer_id);
 		basketVo.setColor_id(color_id);
 		basketVo.setName(name);
@@ -62,6 +62,7 @@ public class BasketController {
 		MemberVo memberVo = (MemberVo) session.getAttribute("loginMember");
 		
 		List<BasketVo> basketVo = service.selectBasket(memberVo.getId());
+		
 		model.addAttribute("basketVo", basketVo);
 		return "member/myPage/basket";
 	}

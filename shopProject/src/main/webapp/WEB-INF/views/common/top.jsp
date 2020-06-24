@@ -37,7 +37,6 @@
 					
 					<form method="post" action="logOut">
 						<br>
-						 후기게시판 | 
 						<a href="${pageContext.request.contextPath}/infoModify">개인정보수정</a> |
 						<a href="${pageContext.request.contextPath}/favorites">즐겨찾기 </a> |
 						<a href="${pageContext.request.contextPath}/delivery"> 배송조회 </a> |

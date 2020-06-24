@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import DAO.BasketDao;
+import DAO.BoardDao;
 import DAO.FavoriteDao;
 import DAO.MemberDao;
 import DAO.OrderDao;
@@ -32,5 +33,9 @@ public class DaoConfig {
 	@Bean
 	public BasketDao basketDao() {
 		return new BasketDao();
+	}
+	@Bean
+	public BoardDao boardDao() {
+		return new BoardDao();
 	}
 }

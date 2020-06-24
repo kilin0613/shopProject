@@ -35,11 +35,11 @@
 							style="max-width: 190px; max-height: 190px;" />
 							</div>
 						<div style="display: inline-block; width: 570px; height: 200px;">
-							<p style="margin-left: 10px;">${orderList.name} | 색상 | ${orderList.size_type}</p>
-							<p style="margin-left: 10px;">${orderList.quantity} |</p>
-							<p style="margin-left: 10px;">${orderList.price} |</p>
+							<p style="margin-left: 10px;">상품명 | ${orderList.name} | 색상  ${orderList.color} | 사이즈 ${orderList.size_type}</p>
+							<p style="margin-left: 10px;">수량 | ${orderList.quantity} |</p>
+							<p style="margin-left: 10px;">가격 | ${orderList.price} |</p>
 							
-						
+							<input type="hidden" name = "color_id" value="${orderList.color_id}">
 							<input type="hidden" name = "product_id" value="${orderList.product_id}">
 							<input type="hidden" name = "name" value="${orderList.name}">
 							<input type="hidden" name = size_type value="${orderList.size_type}">

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardDao">
+	<insert id="insertBoard">
+		INSERT INTO BOARD(BOARD_ID,PRODUCT_ID,CUSTOMER_ID,B_TITLE,B_CONTENT)
+		VALUES((SELECT NVL(MAX(BOARD_ID),0)+1 FROM BOARD),
+		#{product_id},#{customer_id},#{b_title},#{b_content})
+	</insert>
+	
+	<select id="selectBoard" resultType="VO.BoardVo">
+		SELECT * FROM BOARD
+		WHERE PRODUCT_ID = #{product_id}
+	</select>
+	
+	<!-- 
+	<delete id="deleteBoard">
+	DELETE FROM BOARD
+			WHERE PRODUCT_ID=#{product_id}
+			AND CUSTOMER_ID=#{customer_id}
+	</delete>
+ -->
+
+
+
+
+
+</mapper>

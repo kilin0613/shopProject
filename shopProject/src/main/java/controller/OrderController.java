@@ -42,16 +42,20 @@ public class OrderController {
 		String address = req.getParameter("address");
 		String address_detail = req.getParameter("address_detail");
 		String p_blob = req.getParameter("p_blob");
+		String color_id = req.getParameter("color_id");
+		
 		
 		
 		OrderVo orderVo = new OrderVo();
 		orderVo.setName(name);
 		orderVo.setProduct_id(product_id);
+		orderVo.setColor_id(color_id);
 		orderVo.setQuantity(quantity);
 		orderVo.setSize_type(size_option);
 		orderVo.setPrice(price * quantity);
 		orderVo.setAddress(address+address_detail);
 		orderVo.setP_blob(p_blob);
+		orderVo.setColor(order_service.getColorNameService(color_id));
 		
 		
 		List<OrderVo> orderList = new ArrayList<OrderVo>();
@@ -62,7 +66,7 @@ public class OrderController {
 		return "order/orderAndPayment";
 	}
 
-	@PostMapping("/orderAndPayment") // 장바구니주문
+	@PostMapping("/orderAndPayment") // 장바구니 ->주문화면
 	public String getOrderAndPayment(Model model, HttpServletRequest req) {
 		HttpSession session = req.getSession();
 
@@ -72,10 +76,11 @@ public class OrderController {
 		MemberVo memberVo = (MemberVo) session.getAttribute("loginMember");
 		String customer_id = memberVo.getCustomer_id();
 		List<BasketVo> orderList = basket_service.selectBasket(customer_id);
+	
 		model.addAttribute("address",memberVo.getAddress());
 		model.addAttribute("orderList", orderList);
 
-		return "order/orderAndPayment";/* "order/orderAndPayment"; */
+		return "order/orderAndPayment";
 	}
 
 	@PostMapping("/order")
@@ -96,8 +101,7 @@ public class OrderController {
 		String customer_id = memberVo.getCustomer_id();
 		String address = req.getParameter("address");
 		String address_detail = req.getParameter("address_detail");
-		System.out.println(address+address_detail);
-		String color = "1";
+		String color_id[] = req.getParameterValues("color_id");
 		int total_price = 0;
 
 		List<OrderVo> orderList = new ArrayList<OrderVo>();
@@ -115,7 +119,7 @@ public class OrderController {
 			orderVo.setProduct_id(product_id[i]); // detail
 			orderVo.setSize_type(size_type[i]); // detail
 			orderVo.setQuantity(Integer.parseInt(quantity[i])); // detail
-			orderVo.setColor(color); // detail
+			orderVo.setColor_id(color_id[i]); // detail
 			orderVo.setAddress(address+address_detail);
 			orderList.add(orderVo);
 		}

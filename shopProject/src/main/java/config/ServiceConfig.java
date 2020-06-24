@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import service.BasketService;
+import service.BoardService;
 import service.FavoriteService;
 import service.MainService;
 import service.MemberService;
@@ -37,6 +38,10 @@ public class ServiceConfig {
 	@Bean
 	public BasketService basketService() {
 		return new BasketService();
+	}
+	@Bean
+	public BoardService boardService() {
+		return new BoardService();
 	}
 	
 }

@@ -35,7 +35,7 @@
 						</div>
 					<div style="display: inline-block; width: 570px; height: 200px;">
 						<p style="margin-left: 10px;">상품이름${basketVo.name} |
-							색상${basketVo.color_id} | 사이즈${basketVo.size_type}</p>
+							색상${basketVo.color} | 사이즈${basketVo.size_type}</p>
 						<p style="margin-left: 10px;">수량 |${basketVo.quantity}</p>
 						<p style="margin-left: 10px;">금액 ${basketVo.price}|</p>
 					</div>

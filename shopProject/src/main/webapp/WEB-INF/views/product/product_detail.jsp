@@ -58,7 +58,7 @@ ul {
 						
 	
 	
-	<div style="width: 1100px; height: 1000px; margin-left: 15%;">
+	<div style="width: 1100px; min-height: auto; margin-left: 15%;">
 		<div style="margin-top: 30px; width: 1150px; height: 600px;">
 			<div
 				style="float: left; width: 600px; height: 600px; border: thin solid #000000; display: inline-block; text-align: center; font-size: 8pt;">
@@ -79,6 +79,7 @@ ul {
 								pattern="###,###,###" />
 							\
 						</p></li>
+						
 					<li><p>
 							S&nbsp;I&nbsp;Z&nbsp;E | <select id =size_option name="size_option">
 								<option value="">선택</option>
@@ -87,7 +88,19 @@ ul {
 								<option value="L">L</option>
 								<option value="XL">XL</option>
 							</select>
-						</p></li>
+						</p>
+					</li>
+					<li><p>
+								색&nbsp;&nbsp;&nbsp;상 | <select id ="color_id" name="color_id">
+								<option value="">선택</option>
+								<c:forEach var="colorList" items="${colorList}">
+								<option value="${colorList.color_id}">${colorList.color}</option>
+								
+								</c:forEach>
+							</select>
+						</p>
+					</li>
+					
 					<li><p>
 							수&nbsp;&nbsp;&nbsp;량 |
 							<button type="button" onclick="btnMinus();">-</button>
@@ -103,6 +116,7 @@ ul {
 						</p></li>
 					<li><p>
 					<c:if test="${loginMember ne null}">
+							
 							<input type="hidden" name = "p_blob" value="${productVo.blobToBase64}">
 							<input type="hidden" name = "product_name" value="${productVo.name}">
 							<input type="hidden" name = "price" value="${productVo.price}">
@@ -125,6 +139,59 @@ ul {
 				</ul>
 				</form>
 			</div>
+		</div>
+
+<!--게시판-->
+		<div id="board">
+			<c:if test="${loginMember==null}">
+				<p>
+					소감을 남기시려면 <a href="${pageContext.request.contextPath}/login">로그인</a>해주세요
+				</p>
+			</c:if>
+			<c:if test="${loginMember!=null}">
+				<section class="boardform" style="padding:30px 0; ">
+					<form role="form" method="get">
+					<input type="hidden" name="product_id" id=product_id value="${productVo.product_id}">
+					
+					<div class="custmer_name" style="margin:10px 0;"">
+						<textarea name="b_content" id="b_content" style="font-size:16px; font-family:'맑은 고딕', verdana; padding:10px; width:500px;; height:150px;"> 
+					</textarea>
+					
+					</div>
+					<div class="input" style="margin:10px 0;">
+					
+						<input type="submit"
+							formaction="${pageContext.request.contextPath}/board" value="후기남기기"
+							formmethod="get" style="font-size:20px; padding:5px 10px; margin:10px 0; background:#fff; border:1px solid #ccc; ">
+
+					</div>
+					</form>
+				</section>
+			</c:if>
+
+
+			<section class="boardlist" style="padding:30px 0; ">
+				<ol style=" padding:0; margin:0; ">
+					<c:forEach items="${BoardVo}" var="BoardVo">
+					<input type="hidden" name="product_id" value="${BoardVo.product_id}">
+					<input type="hidden" name="customer_name" value="${BoardVo.customer_id}">
+					<input type="hidden" name="date" value="${BoardVo.b_date}">
+					<li style=" padding:10px 0; border-bottom:2px solid #eee; ">
+						<div class="customer">
+						<span class="custmer_name" style="font-size:24px; font-weight:bold; ">${BoardVo.customer_id}</span>
+						<span class="date" style=" color:#999; display:inline-block; margin-left:10px; ">
+					
+						<fmt:formatDate value="${BoardVo.b_date}" pattern="yyyy-MM-dd"/></span>
+						
+						
+						</div>
+						<div class="b_comment" style="padding:10px; margin:20px 0; ">${BoardVo.b_content}</div>
+					</li>
+					</c:forEach>
+				</ol>
+
+			</section>
+
 		</div>
 
 	</div>

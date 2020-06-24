@@ -20,12 +20,17 @@
 	<insert id="order_detail">
 		INSERT INTO ORDER_DETAIL
 		VALUES ((SELECT NVL(MAX(ORDER_DETAIL_ID),0)+1 FROM ORDER_DETAIL),(SELECT MAX(ORDER_ID) FROM ORDER_MAIN),#{product_id}
-		,#{color},#{size_type},'배송준비중',#{quantity})
+		,#{color_id},#{size_type},'배송준비중',#{quantity})
 	</insert>
 	
 	<select id="delivery" resultType="VO.OrderVo">
 		SELECT PRODUCT_ID,COLOR_ID,SIZE_TYPE,ADDRESS,QUANTITY,PAYMENT_INFO,STATUS FROM ORDER_DETAIL,ORDER_MAIN 
 		WHERE ORDER_DETAIL.ORDER_ID = ORDER_MAIN.ORDER_ID AND CUSTOMER_ID=#{customer_id}
+	</select>
+	
+	<select id="selectColorOne" resultType="String">
+		SELECT COLOR FROM COLOR
+		WHERE COLOR_ID = #{color_id}
 	</select>
 	
 	
