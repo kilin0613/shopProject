@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,9 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import VO.BasketVo;
+import DTO.BasketDto;
+import DTO.DeliveryDto;
+import DTO.OrderDto;
 import VO.MemberVo;
-import VO.OrderVo;
 import service.BasketService;
 import service.OrderService;
 
@@ -27,106 +27,56 @@ public class OrderController {
 	@Autowired
 	OrderService order_service;
 
-	@PostMapping("/orderAndPaymentOne") // 단일주문
-	public String getOrderAndPaymentOne(Model model, HttpServletRequest req) {
-		HttpSession session = req.getSession();
-		MemberVo memberVo = (MemberVo)session.getAttribute("loginMember");
-		if (session.getAttribute("loginMember") == null) {
-			return "redirect:/login";
-		}
-		String product_id = req.getParameter("product_id");
-		String name = req.getParameter("product_name");
-		String size_option = req.getParameter("size_option");
-		int quantity = Integer.parseInt(req.getParameter("quantity"));
-		int price = Integer.parseInt(req.getParameter("price"));
-		String address = req.getParameter("address");
-		String address_detail = req.getParameter("address_detail");
-		String p_blob = req.getParameter("p_blob");
-		String color_id = req.getParameter("color_id");
-		
-		
-		
-		OrderVo orderVo = new OrderVo();
-		orderVo.setName(name);
-		orderVo.setProduct_id(product_id);
-		orderVo.setColor_id(color_id);
-		orderVo.setQuantity(quantity);
-		orderVo.setSize_type(size_option);
-		orderVo.setPrice(price * quantity);
-		orderVo.setAddress(address+address_detail);
-		orderVo.setP_blob(p_blob);
-		orderVo.setColor(order_service.getColorNameService(color_id));
-		
-		
-		List<OrderVo> orderList = new ArrayList<OrderVo>();
-		orderList.add(orderVo);
-		model.addAttribute("address",memberVo.getAddress());
-		model.addAttribute("orderList", orderList);
-
-		return "order/orderAndPayment";
-	}
-
-	@PostMapping("/orderAndPayment") // 장바구니 ->주문화면
-	public String getOrderAndPayment(Model model, HttpServletRequest req) {
-		HttpSession session = req.getSession();
-
-		if (session.getAttribute("loginMember") == null) {
-			return "redirect:/login";
-		}
-		MemberVo memberVo = (MemberVo) session.getAttribute("loginMember");
-		String customer_id = memberVo.getCustomer_id();
-		List<BasketVo> orderList = basket_service.selectBasket(customer_id);
+	@PostMapping("/order")	
+	public String postOrder(Model model, HttpServletRequest req , OrderDto orderDto ) {
 	
-		model.addAttribute("address",memberVo.getAddress());
-		model.addAttribute("orderList", orderList);
-
-		return "order/orderAndPayment";
-	}
-
-	@PostMapping("/order")
-	public String postOrder(Model model, HttpServletRequest req) {
 		HttpSession session = req.getSession();
+		if (session.getAttribute("loginMember") == null) {
+			
+			return "redirect:/login";
+		}
+		
+		String customer_id = ((MemberVo)session.getAttribute("loginMember")).getCustomer_id();
+		
+		orderDto.setCustomer_id(customer_id);
+		
+		order_service.orderService(orderDto); 
+	
+		return "order/paymentCompleted";
+	}
+	
+	@PostMapping("/orderAndPayment") 
+	public String postOrderAndPayment(Model model, HttpServletRequest req, OrderDto orderList, BasketDto basketDto) {
+		HttpSession session = req.getSession();
+
 		if (session.getAttribute("loginMember") == null) {
 			return "redirect:/login";
 		}
-		MemberVo memberVo = (MemberVo) session.getAttribute("loginMember");
+		
+		//단일상품주문
+		if (orderList.getBasketDto() == null) {
+			basketDto.setColor(order_service.getColorNameService(basketDto.getColor_id()));
+			basketDto.setSize_name(order_service.getSizeNameService(basketDto.getSize_id()));
+			
+			int total_price = basketDto.getQuantity()*basketDto.getTotal_price();	
+			orderList.setFinal_price(total_price);
+			basketDto.setTotal_price(total_price);
+			List<BasketDto> basketList = new ArrayList<BasketDto>();
+			basketList.add(basketDto);
 
-		OrderVo orderVo = new OrderVo();
-		String name[] = req.getParameterValues("name");
-		String size_type[] = req.getParameterValues("size_type");
-		String quantity[] = req.getParameterValues("quantity");
-		String price[] = req.getParameterValues("price");
-		String product_id[] = req.getParameterValues("product_id");
-		String payment_info = req.getParameter("payment");
-		String customer_id = memberVo.getCustomer_id();
-		String address = req.getParameter("address");
-		String address_detail = req.getParameter("address_detail");
-		String color_id[] = req.getParameterValues("color_id");
-		int total_price = 0;
-
-		List<OrderVo> orderList = new ArrayList<OrderVo>();
-
-		for (int i = 0; i < price.length; i++) {
-			total_price += Integer.parseInt(price[i]);
+			orderList.setBasketDto(basketList);
 		}
-
-		for (int i = 0; i < name.length; i++) {
-			orderVo = new OrderVo();
-			orderVo.setCustomer_id(customer_id); // main
-			orderVo.setPayment_info(payment_info); // main
-			orderVo.setTotal_price(total_price); // main
-			orderVo.setAddress(address); // main
-			orderVo.setProduct_id(product_id[i]); // detail
-			orderVo.setSize_type(size_type[i]); // detail
-			orderVo.setQuantity(Integer.parseInt(quantity[i])); // detail
-			orderVo.setColor_id(color_id[i]); // detail
-			orderVo.setAddress(address+address_detail);
-			orderList.add(orderVo);
+		else {//장바구니 주문 (fianl_price구하기)
+			int final_price=0;
+			for(int i=0; i<orderList.getBasketDto().size();i++) {
+				final_price = final_price + orderList.getBasketDto().get(i).getTotal_price();
+			}
+			orderList.setFinal_price(final_price);
 		}
-
-		order_service.orderService(orderList);
-
-		return "order/paymentCompleted";
+		
+		model.addAttribute("orderList",orderList);
+		
+		return "order/orderAndPayment";
 	}
 
 	@GetMapping("/delivery")
@@ -138,10 +88,8 @@ public class OrderController {
 			return "redirect:/login";
 		}
 		
-		
-		  List<OrderVo> orderList = order_service.selectDelivery(memberVo);
-		  model.addAttribute("orderList", orderList);
-		 
+		  List<DeliveryDto> deliveryList = order_service.selectDelivery(memberVo.getCustomer_id());
+		  model.addAttribute("deliveryList", deliveryList);
 		
 		return "member/myPage/delivery";
 	}

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    
+    <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,27 +31,31 @@
 								</tr>
 							</table>
 							</table>
-							<table style="width:auto; height:240px;">
-								<c:forEach var="orderList" items="${orderList}">
+							<table style="width:auto; height:auto;">
+								<c:forEach var="deliveryList" items="${deliveryList}">
 									<tr>	
-										<td>
-											<img src="data:image:png;base64,${orderList.p_blob}"
+										<td rowspan="2">
+											<img src="data:image:png;base64,${deliveryList.blobToBase64}"
 											style="max-width: 100px; max-height: 100px;"/>			
 										</td>
 										<td>
-											${orderList.name}
+											${deliveryList.product_name}
+										
+											${deliveryList.color}
+										
+											${deliveryList.size_name}
+									
+											${deliveryList.quantity}개
+											<fmt:formatNumber value = "${deliveryList.total_price}" pattern="###,###,###"/>원
 										</td>
+										</tr>
+										<tr>
 										<td>
-											${orderList.color}
-										</td>
-										<td>
-											${orderList.quantity}
-										</td>
-										<td>
-											${orderList.address}
-										</td>
-										<td>
-											[${orderList.status}]
+											배송지 ${deliveryList.address}
+									
+											배송상태 [${deliveryList.status}]
+
+											${deliveryList.payment_info}
 										</td>
 									</tr>
 								</c:forEach>

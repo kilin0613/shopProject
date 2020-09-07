@@ -24,7 +24,7 @@ function checkInfo(){
 <title>Insert title here</title>
 </head>
 <body>
-	<form method="post" onsubmit="return checkInfo();">
+	<form method="post">
 		<table border="1" style="margin-left: auto; margin-right: auto;">
 			<tr>
 				<td>
@@ -144,14 +144,16 @@ function checkInfo(){
 									<tr>
 										<td>&nbsp;</td>
 										<td colspan="2" align="center" valign="middle"><input
-											type="submit" value="탈퇴하기"
+											type="submit" value="탈퇴하기" onclick="return checkInfo();"
 											style="width: 150; height: 40; font-size: 14px; font-weight: bold;" />
 										</td>
 										<td>&nbsp;</td>
-										<td colspan="2" align="center" valign="middle"><input
-											type="submit" value="취소"
-											formaction="${pageContext.request.contextPath}"
-											style="width: 150; height: 40; font-size: 14px; font-weight: bold;" />
+										<td colspan="2" align="center" valign="middle"><button
+											type="submit" formaction="${pageContext.request.contextPath}/" formmethod="get"
+											style="width: 150; height: 40; font-size: 14px; font-weight: bold;" >
+											취소
+											</button>
+											
 										</td>
 									</tr>
 

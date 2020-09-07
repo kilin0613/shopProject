@@ -102,7 +102,7 @@ function checkInfo(){
 										</tr>
 										<tr>
 											<td align="center">
-												<table border="0" width="80%">
+												<table border="0" style= "width:80%;">
 													<tr>
 														<td width="80"></td>
 														<td></td>

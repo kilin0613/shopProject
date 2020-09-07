@@ -13,12 +13,9 @@
  h1, h2, h3, h4, h5, h6 { margin:0; padding:0; }
  ul, lo, li { margin:0; padding:0; list-style:none; }
 #side_style{
-      /* background-color:rgba(220, 220, 220 ,0.5); */
-      padding-left:3%;   
+      /* background-color:rgba(220, 220, 220 ,0.5); */  
       width:150px;
-      min-height:100%;
-      border-right:thin solid gray;
-      height:auto; 
+      height:100%; 
       float:left;
    }
 h3 { font-size:22px; margin-bottom:20px; text-align:center; }
@@ -47,8 +44,8 @@ li > ul.low li { width:180px; }
          <li><a>outer</a>
          
             <ul class="low">
-               <li><a href="${pageContext.request.contextPath}/category&name=outer_man">man</a></li>
-               <li><a href="${pageContext.request.contextPath}/category?name=outer_woman">woman</a></li>
+               <li><a href="${pageContext.request.contextPath}/category?category1=man&category2=outer">man</a></li>
+               <li><a href="${pageContext.request.contextPath}/category?category1=woman&category2=outer">woman</a></li>
             </ul>
             </li>
          <li><a>tee</a>

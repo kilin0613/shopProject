@@ -6,15 +6,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/loginValueCheck.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/spacebarEvent.js"></script>
 
-<script type="text/javascript">	//히스토리
-	window.history.forward();
-	function noBack() {
-		window.history.forward();
-	}
-</script>
-
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/errorMsg.css" type="text/css" />
 
 <style>
 .loginHeaderV3 {
@@ -44,27 +40,45 @@
 	font-family: "AppleSDGothicNeo", "Apple SD Gothic Neo",
 		"Apple SD 산돌고딕 Neo", sans-serif;
 }
+
+.submit_box{
+background: #000;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+    height: 60px;
+    line-height: 64px;
+    text-align: center;
+    width: 100%;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
 </style>
 
 <meta charset="EUC-KR">
 <title>로그인</title>
 </head>
-<body onload="noBack()">
+<body>
 
 	<div class="loginBoxWrap">
-		<!-- <div class="loginHeaderV3">
-			<img src="resources/image/logo.jpg"/>
-		</div> -->
-		<form name="loginform" action="login" method="post">
+		<form action="login" method="post">
 			<p>
-				<label>아이디</label><br> <input type="text" name="id"
+				<label>아이디</label><br> <input type="text" name="id" id="id" onkeydown="preventSpacebar();"
 					class="inputV3" title="아이디" placeholder="아이디를 입력해 주세요.">
 			</p>
 			<p>
-				<label>비밀번호</label><br> <input type="password" name="password"
+				<label>비밀번호</label><br> <input type="password" name="password" id="password" onkeydown="preventSpacebar();"
 					class="inputV3" title="패스워드" placeholder="비밀번호를 입력해 주세요.">
 			</p>
-			<input type="submit" value="로그인">
+			
+			<span class="errorMsg" id="errorMsg" name= "errorMsg" hidden="true"></span>
+			<br>
+	
+			<input type="submit" value="로그인" class="submit_box">
 		</form>
 	</div>
 

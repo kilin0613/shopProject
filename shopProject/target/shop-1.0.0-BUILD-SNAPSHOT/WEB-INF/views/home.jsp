@@ -7,7 +7,6 @@
 <title>ShopProject</title>
 
 <style type="text/css">
-
 div {
 	box-sizing: border-box;
 }
@@ -17,10 +16,20 @@ div {
 <body>
 
 
-	<jsp:include page="common/top.jsp" />
-	<div style="width: 1200px; min-height: 60%; overflow: auto;">
-		<jsp:include page="common/side.jsp" />
+	
+
+
+
+
+
+
+	<div style="width: 100%; height: 100%"> <!-- container -->
+		<jsp:include page="common/top.jsp" />
+		 <jsp:include page="common/side.jsp" />
+		
 		<jsp:include page="common/body.jsp" />
+		
+		
 		<jsp:include page="common/footer.jsp" />
 	</div>
 

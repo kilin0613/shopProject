@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="Order">
+
+	<update id="productQuantity">
+		UPDATE PRODUCT_MANAGEMENT
+		SET QUANTITY = QUANTITY - #{quantity}
+		where PRODUCT_ID = #{product_id} AND SIZE_TYPE = #{size_type}
+	</update>
+
+	<insert id="order_main">
+		INSERT INTO ORDER_MAIN
+		VALUES((SELECT NVL(MAX(ORDER_ID),0)+1 FROM ORDER_MAIN),#{customer_id},SYSDATE,#{payment_info},#{address},#{total_price})
+	</insert>
+	
+	
+	<insert id="order_detail">
+		INSERT INTO ORDER_DETAIL
+		VALUES ((SELECT NVL(MAX(ORDER_DETAIL_ID),0)+1 FROM ORDER_DETAIL),(SELECT MAX(ORDER_ID) FROM ORDER_MAIN),#{product_id}
+		,#{color_id},#{size_type},'배송준비중',#{quantity})
+	</insert>
+	
+	<select id="delivery" resultType="VO.OrderVo">
+		SELECT PRODUCT_ID,COLOR_ID,SIZE_TYPE,ADDRESS,QUANTITY,PAYMENT_INFO,STATUS FROM ORDER_DETAIL,ORDER_MAIN 
+		WHERE ORDER_DETAIL.ORDER_ID = ORDER_MAIN.ORDER_ID AND CUSTOMER_ID=#{customer_id}
+	</select>
+	
+	<select id="selectColorOne" resultType="String">
+		SELECT COLOR FROM COLOR
+		WHERE COLOR_ID = #{color_id}
+	</select>
+	
+	
+</mapper>

@@ -18,10 +18,11 @@ function start_ajax(){
         data:{"id": id, "email":email},
         dataType: "json",
         success: function(){
-        	alert("성공");
+        	alert("입력하신 이메일로 임시비밀번호를 보냈습니다.");
+        	location.href = "login";
         } ,
         error:function(){
-        	alert("실패");
+        	alert("아이디와 이메일을 확인해주세요");
         }
     });
     return false;

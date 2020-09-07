@@ -32,7 +32,6 @@ public class MemberService {
 	}
 	
 	public MemberVo loginService(MemberVo memberVo) {
-		
 		memberVo = memberDao.selectMemberInfo(memberVo);
 		if(memberVo!=null) {
 			return memberVo;

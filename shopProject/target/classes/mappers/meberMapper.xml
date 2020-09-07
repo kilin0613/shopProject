@@ -15,7 +15,7 @@
 	</insert>
 
 	<select id="selectId" resultType="string">
-		SELECT ID FROM CUSTOMER
+		SELECT CUSTOMER_ID FROM CUSTOMER
 		WHERE ID = #{memberId}
 	</select>
 

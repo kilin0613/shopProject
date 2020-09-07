@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import VO.ProductVo;
+import DTO.ProductDto;
 import service.MainService;
 
 /**
@@ -32,8 +32,8 @@ public class HomeController {
 	public String home(Locale locale, Model model) {
 		logger.info("Main 화면 호출", locale);
 		
-		List<ProductVo> productVo = service.selectMainProduct();
-		model.addAttribute("productVo", productVo);
+		List<ProductDto> productDto = service.selectMainProduct();
+		model.addAttribute("productDto", productDto);
 		return "home";
 	}
 	

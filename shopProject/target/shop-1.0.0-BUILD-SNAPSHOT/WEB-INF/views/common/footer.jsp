@@ -16,9 +16,12 @@
 </head>
 <body>
 <div id="footer_style">
-	Footer
-	<br>
-	회사정보(프로젝트원 정보로 대체)
+	
+	<h4>ShopProject</h4>
+	2016100313 서동빈<br> 
+	2014114126 황민호<br>
+	2016100309 김찬호 
+	
 </div>
 
 </body>

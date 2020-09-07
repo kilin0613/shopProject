@@ -5,16 +5,16 @@
   
 <mapper namespace="ProductDao">
 
-	<resultMap id="blob" type="VO.ProductVo">
+	<resultMap id="blob" type="DTO.ProductDto">
     	<result property="p_blob" column="P_BLOB" jdbcType="BLOB" javaType="_byte[]"/>
 	</resultMap>
 
-	<select id="mainProduct" resultType="VO.ProductVo" resultMap="blob">
+	<select id="mainProduct" resultType="DTO.ProductDto" resultMap="blob">
 		<![CDATA[SELECT *FROM (SELECT *FROM PRODUCT ORDER BY PRODUCT_ID)
 		WHERE ROWNUM <= 10]]>
 	</select>
 	
-	<select id="selectProductDetail" resultType="VO.ProductVo">
+	<select id="selectProductDetail" resultType="DTO.ProductDto">
 		SELECT *FROM PRODUCT
 		WHERE PRODUCT_ID = #{productVo.product_id}
 	</select>
@@ -34,14 +34,10 @@
 		WHERE  PRODUCT_ID = #{product_id}
 	</select>
 	
-   
    <select id="selectCategy" resultType="VO.ProductVo" parameterType="map" resultMap="blob" >
       SELECT * FROM PRODUCT
       WHERE PRODUCT_ID LIKE #{category1}||'%'||#{category2}
    </select>
-   
-   
-   
    
    <select id = "selectBlob" resultType="VO.ProductVo" resultMap="blob" >
    		select p_blob from product
@@ -51,6 +47,11 @@
    <select id = "selectColor" resultType="VO.ColorVo">
    		SELECT * FROM COLOR
 		WHERE COLOR_ID IN (SELECT COLOR_ID FROM PRODUCT_MANAGEMENT WHERE PRODUCT_ID = #{product_id})
+   </select>
+   
+   <select id="selectSize" resultType="VO.SizeVo">
+		SELECT *FROM PRODUCT_SIZE
+	    WHERE SIZE_ID IN (SELECT SIZE_ID FROM PRODUCT_MANAGEMENT WHERE PRODUCT_ID = #{product_id})
    </select>
 	
 

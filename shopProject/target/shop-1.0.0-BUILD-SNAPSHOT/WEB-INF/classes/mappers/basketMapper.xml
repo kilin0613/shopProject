@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BasketDao">
+   
+
+
+   <insert id="insertBasket">
+         INSERT INTO BASKET(CUSTOMER_ID, PRODUCT_ID, COLOR_ID, SIZE_TYPE, NAME, QUANTITY)
+         VALUES(#{customer_id}, #{product_id}, #{color_id}, #{size_type}, #{name}, #{quantity})
+   </insert>
+   
+   
+   <select id="selectBasket" resultType="VO.BasketVo">
+      SELECT * FROM BASKET,COLOR
+      WHERE CUSTOMER_ID =#{customer_id} AND BASKET.COLOR_ID = COLOR.COLOR_ID  
+   </select>
+   
+   <delete id="deleteBasket">
+         DELETE FROM BASKET
+         WHERE PRODUCT_ID=#{product_id}
+   </delete>
+
+</mapper>

@@ -7,8 +7,9 @@
 <html>
 <head>
 
-	<script src="${pageContext.request.contextPath}/resources/js/addressAPI.js"></script>
+	
 	<script src="${pageContext.request.contextPath}/resources/js/checkSignUp.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/addressAPI.js"></script>
 	<script	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js?autoload=false"></script>
 
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/signUp.css" type="text/css" />
