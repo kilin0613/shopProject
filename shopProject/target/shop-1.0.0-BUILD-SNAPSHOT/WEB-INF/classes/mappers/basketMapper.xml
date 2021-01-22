@@ -8,19 +8,30 @@
 
 
    <insert id="insertBasket">
-         INSERT INTO BASKET(CUSTOMER_ID, PRODUCT_ID, COLOR_ID, SIZE_TYPE, NAME, QUANTITY)
-         VALUES(#{customer_id}, #{product_id}, #{color_id}, #{size_type}, #{name}, #{quantity})
+         INSERT INTO BASKET(CUSTOMER_ID, PRODUCT_ID, COLOR_ID, SIZE_ID, QUANTITY)
+         VALUES(#{customer_id}, #{product_id}, #{color_id}, #{size_id}, #{quantity})
    </insert>
    
    
-   <select id="selectBasket" resultType="VO.BasketVo">
-      SELECT * FROM BASKET,COLOR
-      WHERE CUSTOMER_ID =#{customer_id} AND BASKET.COLOR_ID = COLOR.COLOR_ID  
+   	<resultMap id="blob" type="DTO.BasketDto">
+    	<result property="p_blob" column="P_BLOB" jdbcType="BLOB" javaType="_byte[]"/>
+	</resultMap>
+   
+   
+   <select id="selectBasket" resultType="DTO.BasketDto" resultMap="blob">
+    	 SELECT CUSTOMER_ID,BASKET.PRODUCT_ID,BASKET.COLOR_ID,BASKET.SIZE_ID,PRODUCT_NAME,COLOR,SIZE_NAME,QUANTITY,(PRICE * QUANTITY) TOTAL_PRICE,P_BLOB
+		 FROM BASKET,COLOR,PRODUCT,PRODUCT_SIZE
+		 WHERE BASKET.CUSTOMER_ID = #{customer_id} AND BASKET.COLOR_ID = COLOR.COLOR_ID
+         AND BASKET.SIZE_ID=PRODUCT_SIZE.SIZE_ID
+         AND BASKET.PRODUCT_ID =PRODUCT.PRODUCT_ID
    </select>
    
    <delete id="deleteBasket">
          DELETE FROM BASKET
-         WHERE PRODUCT_ID=#{product_id}
+         WHERE PRODUCT_ID=#{product_id} AND
+         		CUSTOMER_ID = #{customer_id} AND
+         		COLOR_ID =#{color_id} AND
+         		SIZE_ID = #{size_id}
    </delete>
 
 </mapper>

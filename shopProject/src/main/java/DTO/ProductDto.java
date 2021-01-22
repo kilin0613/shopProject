@@ -2,7 +2,7 @@ package DTO;
 
 public class ProductDto {
 
-	private String product_name;
+	private String name;
 	private String product_id;
 	private int price;
 	private byte[] p_blob;
@@ -10,15 +10,15 @@ public class ProductDto {
 
 	@Override
 	public String toString() {
-		return "ProductDto [product_name=" + product_name + ", product_id=" + product_id + ", price=" + price + "]";
+		return "ProductDto [name=" + name + ", product_id=" + product_id + ", price=" + price + "]";
 	}
 
-	public String getProduct_name() {
-		return product_name;
+	public String getName() {
+		return name;
 	}
 
-	public void setProduct_name(String product_name) {
-		this.product_name = product_name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getProduct_id() {

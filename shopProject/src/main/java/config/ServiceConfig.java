@@ -15,14 +15,15 @@ import service.ProductService;
 public class ServiceConfig {
 
 	@Bean
+	public MainService mainService() {
+		return new MainService();
+	} 
+	
+	@Bean
 	public MemberService memberService() {
 		return new MemberService();
 	} 
 	
-	@Bean
-	public MainService mainService() {
-		return new MainService();
-	} 
 	@Bean
 	public ProductService productService() {
 		return new ProductService();

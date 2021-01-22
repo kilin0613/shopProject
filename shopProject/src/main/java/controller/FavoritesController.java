@@ -70,43 +70,5 @@ public class FavoritesController {
 		
 		return true;
 	}
-	
-	
-	
-	
-	/*
-	 * @PostMapping("/detail_favorites") public String postDetail_Favorites(Model
-	 * model, HttpServletRequest req) { HttpSession session = req.getSession();
-	 * MemberVo memberVo = (MemberVo) session.getAttribute("loginMember"); String
-	 * product_id = req.getParameter("product_id");
-	 * 
-	 * FavoriteVo favoriteVo = (FavoriteVo) session.getAttribute("favorites"); if
-	 * (memberVo != null) { // 로그인 유저 if (favoriteVo == null) { favoriteVo = new
-	 * FavoriteVo();
-	 * 
-	 * favoriteVo.setCustomer_id(memberVo.getCustomer_id());// 로그인중인 id
-	 * favoriteVo.setProduct_id(product_id); service.insertFavorites(favoriteVo); //
-	 * 즐겨찾기 추가 model.addAttribute(favoriteVo);
-	 * 
-	 * return "redirect:/" + "product_detail/?product_id=" + product_id; } else {
-	 * service.deleteFavorites(favoriteVo); session.removeAttribute("favorites");
-	 * return "redirect:/" + "product_detail/?product_id=" + product_id; } }
-	 * 
-	 * return "redirect:/" + "product_detail/?product_id=" + product_id; }
-	 * 
-	 * @PostMapping("/favoritesDelete") public String postFavorites(Model model,
-	 * HttpServletRequest req) { HttpSession session = req.getSession(); if
-	 * (session.getAttribute("loginMember") == null) { return "redirect:/login"; }
-	 * MemberVo memberVo = (MemberVo) session.getAttribute("loginMember");
-	 * FavoriteVo favoriteVo = new FavoriteVo();
-	 * favoriteVo.setCustomer_id(memberVo.getCustomer_id());
-	 * favoriteVo.setProduct_id(req.getParameter("product_id"));
-	 * 
-	 * service.deleteFavorites(favoriteVo);
-	 * 
-	 * return "redirect:/favorites"; }
-	 */
-
-
 	 
 }

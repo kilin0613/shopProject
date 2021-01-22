@@ -53,7 +53,7 @@ img {
 						<a href="product_detail/?product_id=${product.product_id}">
 						<img src="data:image:png;base64,${product.blobToBase64}"/> </a>
 					</div>
-					상품명 : ${product.name}<br> 가격 :
+					상품명 : ${product.product_name}<br> 가격 :
 					<fmt:formatNumber value="${product.price}" pattern="###,###,###" />
 					\
 				</div>

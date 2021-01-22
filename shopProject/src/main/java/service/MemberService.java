@@ -13,7 +13,7 @@ public class MemberService {
 	@Autowired
 	MemberDao memberDao;
 
-	@Transactional
+	
 	public int signUpService(MemberVo memberVo) {
 		
 		if (memberDao.selectMemberId(memberVo.getId()) == null) {//id 체크

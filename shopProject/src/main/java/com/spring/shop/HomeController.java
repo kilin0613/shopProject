@@ -30,7 +30,9 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
+		
 		logger.info("Main 화면 호출", locale);
+		
 		
 		List<ProductDto> productDto = service.selectMainProduct();
 		model.addAttribute("productDto", productDto);

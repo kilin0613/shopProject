@@ -60,7 +60,7 @@ ul {
 					<!-- command -->
 					<form:form modelAttribute="basketDto" method="post">
 						<ul>
-							<li><p>상품명 | ${productDto.product_name}</p></li>
+							<li><p>상품명 | ${productDto.name}</p></li>
 							<li><p>
 									가&nbsp;&nbsp;&nbsp;격 |
 									<input type="hidden" value="${productDto.price}" id="product_price">
@@ -117,7 +117,7 @@ ul {
 						</ul>
 						<input type="hidden" name = "product_id" id = "product_id" value="${productDto.product_id}"/>
 						<input type="hidden" name = "blobToBase64" value="${productDto.blobToBase64}"/>
-						<input type="hidden" name = "product_name" value="${productDto.product_name}"/>
+						<input type="hidden" name = "product_name" value="${productDto.name}"/>
 						<input type="hidden" name = "total_price" value="${productDto.price}"/>
 							
 							
